@@ -1,6 +1,7 @@
 #include <assert.h>
 #include <errno.h>
 #include <stddef.h>
+#include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -33,52 +34,67 @@ static void vector_destroy(struct int_vector *vector)
     vector_init(vector);
 }
 
-/*
- * TODO 1：实现扩容。
- *
- * 要求：
- * - 如果 new_capacity <= capacity，直接返回 0。
- * - 使用 realloc()；失败时返回 ENOMEM。
- * - realloc 失败时，原来的 vector 必须保持完全可用。
- * - 成功后更新 values 和 capacity，返回 0。
- */
 static int vector_reserve(struct int_vector *vector, size_t new_capacity)
 {
-    (void)vector;
-    (void)new_capacity;
-    return ENOSYS;
+    int *new_values;
+
+    assert(vector != NULL);
+    if (new_capacity <= vector->capacity) {
+        return 0;
+    }
+    if (new_capacity > SIZE_MAX / sizeof(*new_values)) {
+        return EOVERFLOW;
+    }
+
+    new_values = realloc(vector->values, new_capacity * sizeof(*new_values));
+    if (new_values == NULL) {
+        return ENOMEM;
+    }
+
+    vector->values = new_values;
+    vector->capacity = new_capacity;
+    return 0;
 }
 
-/*
- * TODO 2：在末尾追加 value。
- *
- * 要求：
- * - 空间不足时，以 2 倍 capacity 扩容；初始 capacity 设为 4。
- * - 只有 reserve 成功后才可修改 size。
- * - 成功返回 0；失败时返回 vector_reserve 的错误码。
- */
+
 static int vector_push_back(struct int_vector *vector, int value)
 {
-    (void)vector;
-    (void)value;
-    return ENOSYS;
+    int error;
+    size_t new_capacity;
+
+    assert(vector != NULL);
+    if (vector->size == vector->capacity) {
+        if (vector->capacity == 0) {
+            new_capacity = 4;
+        } else {
+            if (vector->capacity > SIZE_MAX / 2) {
+                return EOVERFLOW;
+            }
+            new_capacity = vector->capacity * 2;
+        }
+
+        error = vector_reserve(vector, new_capacity);
+        if (error != 0) {
+            return error;
+        }
+    }
+
+    vector->values[vector->size++] = value;
+    return 0;
 }
 
-/*
- * TODO 3：读取元素。
- *
- * 要求：
- * - index 越界时返回 ERANGE，且不得写入 *out_value。
- * - 参数为 NULL 时返回 EINVAL。
- * - 成功时写入 *out_value 并返回 0。
- */
 static int vector_get(const struct int_vector *vector, size_t index,
                       int *out_value)
 {
-    (void)vector;
-    (void)index;
-    (void)out_value;
-    return ENOSYS;
+    if (vector == NULL || out_value == NULL) {
+        return EINVAL;
+    }
+    if (index >= vector->size) {
+        return ERANGE;
+    }
+
+    *out_value = vector->values[index];
+    return 0;
 }
 
 static void print_vector(const struct int_vector *vector)
@@ -98,6 +114,15 @@ int main(void)
 
     vector_init(&vector);
 
+    error = vector_reserve(&vector, SIZE_MAX);
+    if (error != EOVERFLOW || vector.values != NULL || vector.size != 0 ||
+        vector.capacity != 0) {
+        fprintf(stderr, "overflow check failed: error=%d\n", error);
+        vector_destroy(&vector);
+        return EXIT_FAILURE;
+    }
+    puts("oversized reserve returned EOVERFLOW; vector stayed unchanged");
+
     for (int number = 10; number <= 60; number += 10) {
         error = vector_push_back(&vector, number);
         if (error != 0) {
@@ -115,6 +140,17 @@ int main(void)
         return EXIT_FAILURE;
     }
     printf("vector[3] = %d\n", value);
+
+    value = -1;
+    error = vector_get(&vector, vector.size, &value);
+    if (error != ERANGE || value != -1) {
+        fprintf(stderr,
+                "out-of-range check failed: error=%d, value=%d\n",
+                error, value);
+        vector_destroy(&vector);
+        return EXIT_FAILURE;
+    }
+    printf("vector[size] returned ERANGE; output value stayed %d\n", value);
 
     vector_destroy(&vector);
     return EXIT_SUCCESS;
