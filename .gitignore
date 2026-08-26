@@ -8,3 +8,6 @@
 # Week 2 C examples built by step1/week2/Makefile
 /step1/week2/01_memory_layout
 /step1/week2/02_undefined_behavior
+
+# Week 3 intermediate build products
+/step1/week3/build/
