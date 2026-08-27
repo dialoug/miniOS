@@ -11,3 +11,8 @@
 
 # Week 3 intermediate build products
 /step1/week3/build/
+
+# Week 4 pthread examples built by step1/week4/Makefile
+/step1/week4/01_thread_lifecycle
+/step1/week4/02_counter_race
+/step1/week4/03_bounded_queue

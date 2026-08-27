@@ -1,5 +1,5 @@
 CC ?= cc
-CPPFLAGS := -MMD -MP
+CPPFLAGS :=
 CFLAGS := -std=c11 -Wall -Wextra -Wpedantic -g
 
 BUILD_DIR := build
@@ -7,6 +7,7 @@ TARGET := $(BUILD_DIR)/elf_demo
 SOURCES := main.c math_ops.c
 OBJECTS := $(SOURCES:%.c=$(BUILD_DIR)/%.o)
 DEPS := $(OBJECTS:.o=.d)
+DEPFLAGS = -MMD -MP -MF $(@:.o=.d) -MT $@
 
 .PHONY: all clean preprocess assembly objects broken-link
 
@@ -22,7 +23,7 @@ $(BUILD_DIR)/%.s: %.c | $(BUILD_DIR)
 	$(CC) $(CPPFLAGS) $(CFLAGS) -S $< -o $@
 
 $(BUILD_DIR)/%.o: %.c | $(BUILD_DIR)
-	$(CC) $(CPPFLAGS) $(CFLAGS) -c $< -o $@
+	$(CC) $(CPPFLAGS) $(CFLAGS) $(DEPFLAGS) -c $< -o $@
 
 $(TARGET): $(OBJECTS)
 	$(CC) $(OBJECTS) -o $@
