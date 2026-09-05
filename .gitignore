@@ -16,3 +16,9 @@
 /step1/week4/01_thread_lifecycle
 /step1/week4/02_counter_race
 /step1/week4/03_bounded_queue
+
+# Week 5 process examples built by step1/week5/Makefile
+/step1/week5/01_fork_identity
+/step1/week5/02_exec_wait
+/step1/week5/03_pipe_parent_child
+/step1/week5/04_exec_pipeline
