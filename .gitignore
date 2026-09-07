@@ -22,3 +22,11 @@
 /step1/week5/02_exec_wait
 /step1/week5/03_pipe_parent_child
 /step1/week5/04_exec_pipeline
+
+# Week 6 file I/O examples built by step1/week6/Makefile
+/step1/week6/01_mini_cp
+/step1/week6/source.txt
+/step1/week6/copy.txt
+
+# Step 2 Week 5 epoll server
+/step2/week5/01_epoll_echo
