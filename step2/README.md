@@ -11,7 +11,7 @@
 | Week 3 | pthread、同步与有界队列 | 已学习 | `step1/week4` |
 | Week 4 | 非阻塞 I/O、`select`/`poll`/`epoll` | 已学习原理 | 待加入观察程序 |
 | Week 5 | socket 与 `epoll` echo server 设计 | 已学习设计 | 下一项实现任务 |
-| Week 6 | mini-shell、信号与作业控制 | 待学习 | — |
+| Week 6 | mini-shell、信号与作业控制 | 进行中 | `step2/week6` |
 | Week 7 | 目录、`mmap`、文件锁与 IPC | 待学习 | — |
 | Week 8 | 事件驱动网络程序整合 | 待学习 | — |
 

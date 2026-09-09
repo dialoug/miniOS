@@ -7,12 +7,14 @@ CFLAGS += -fsanitize=address,undefined -fno-omit-frame-pointer
 LDFLAGS += -fsanitize=address,undefined
 endif
 
+PROGRAMS := 01_epoll_echo 02_slow_client
+
 .PHONY: all clean
 
-all: 01_epoll_echo
+all: $(PROGRAMS)
 
-01_epoll_echo: 01_epoll_echo.c
+%: %.c
 	$(CC) $(CFLAGS) $< -o $@ $(LDFLAGS)
 
 clean:
-	rm -f 01_epoll_echo
+	rm -f $(PROGRAMS)

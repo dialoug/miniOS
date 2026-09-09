@@ -30,3 +30,9 @@
 
 # Step 2 Week 5 epoll server
 /step2/week5/01_epoll_echo
+/step2/week5/02_slow_client
+
+# Step 2 Week 6 mini-shell exercises
+/step2/week6/01_argv_inspect
+/step2/week6/02_parse_command
+/step2/week6/03_mini_shell

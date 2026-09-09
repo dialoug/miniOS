@@ -171,12 +171,15 @@ static int update_client_interest(const struct server *server,
                                   const struct client *client)
 {
     struct epoll_event event = {
-        .events = EPOLLRDHUP,
+        .events = 0,
         .data.ptr = (void *)client,
     };
 
-    if (!client->read_closed && !client->read_paused) {
-        event.events |= EPOLLIN;
+    if (!client->read_closed) {
+        event.events |= EPOLLRDHUP;
+        if (!client->read_paused) {
+            event.events |= EPOLLIN;
+        }
     }
     if (buffer_pending(&client->output) > 0) {
         event.events |= EPOLLOUT;
@@ -266,6 +269,8 @@ static int read_client(struct client *client)
             }
             if (buffer_pending(&client->output) >= OUTPUT_HIGH_WATER) {
                 client->read_paused = true;
+                printf("paused reads fd=%d, pending=%zu\n", client->fd,
+                       buffer_pending(&client->output));
             }
             continue;
         }
@@ -314,6 +319,8 @@ static int flush_client(struct client *client)
     if (client->read_paused &&
         buffer_pending(&client->output) <= OUTPUT_LOW_WATER) {
         client->read_paused = false;
+        printf("resumed reads fd=%d, pending=%zu\n", client->fd,
+               buffer_pending(&client->output));
     }
     return 0;
 }

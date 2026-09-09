@@ -18,6 +18,14 @@ make
 printf 'hello epoll\n' | nc -N 127.0.0.1 9090
 ```
 
+验证背压路径：
+
+```bash
+./02_slow_client 9090
+```
+
+慢客户端把接收缓冲区调小，使用非阻塞 `send()` 持续写入；瞬时 `EAGAIN` 后用 `poll()` 等待，直到连续 100 ms 不可写才确认背压。随后暂停读取一秒，再接收全部回显。最终 `queued` 与 `received` 字节数必须一致，服务器应打印 `paused reads` 与 `resumed reads`。
+
 服务端只绑定 `127.0.0.1`，不会对局域网或公网开放。按 `Ctrl+C` 后停止接收新连接，并给现有连接 3 秒退出宽限期。
 
 ## 连接生命周期
@@ -48,6 +56,7 @@ output offset
 - 短写或 `EAGAIN` 后必须保存未发送数据，并临时关注 `EPOLLOUT`。
 - 输出缓冲区清空后取消 `EPOLLOUT`，避免 socket 长期可写造成无效唤醒。
 - `read() == 0` 表示对端发送方向 EOF；若仍有待发送数据，应排空后再关闭。
+- 确认 EOF 后取消 `EPOLLIN`/`EPOLLRDHUP`；若仍有积压，只等待 `EPOLLOUT`，避免关闭状态反复唤醒事件循环。
 - `send(..., MSG_NOSIGNAL)` 可避免单个断开的客户端用 `SIGPIPE` 终止整个服务器。
 
 ## 背压
