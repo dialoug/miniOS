@@ -36,3 +36,20 @@
 /step2/week6/01_argv_inspect
 /step2/week6/02_parse_command
 /step2/week6/03_mini_shell
+
+# Step 2 Week 7 directory traversal exercises
+/step2/week7/01_mini_find
+/step2/week7/02_mmap_reader
+/step2/week7/03_locked_counter
+/step2/week7/counter.txt
+/step2/week7/04_fifo_server
+/step2/week7/04_fifo_client
+/step2/week7/counter.fifo
+/step2/week7/05_unix_server
+/step2/week7/05_unix_client
+/step2/week7/counter.sock
+/step2/week7/06_epoll_unix_server
+/step2/week7/epoll-counter.sock
+
+# Step 2 Week 8 HTTP server
+/step2/week8/01_http_server

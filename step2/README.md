@@ -9,13 +9,15 @@
 | Week 1 | 进程、fd、pipe 与重定向 | 已学习 | `step1/week5` |
 | Week 2 | 文件 I/O、错误处理与安全覆盖 | 已学习基础 | `step1/week6` |
 | Week 3 | pthread、同步与有界队列 | 已学习 | `step1/week4` |
-| Week 4 | 非阻塞 I/O、`select`/`poll`/`epoll` | 已学习原理 | 待加入观察程序 |
-| Week 5 | socket 与 `epoll` echo server 设计 | 已学习设计 | 下一项实现任务 |
-| Week 6 | mini-shell、信号与作业控制 | 进行中 | `step2/week6` |
-| Week 7 | 目录、`mmap`、文件锁与 IPC | 待学习 | — |
-| Week 8 | 事件驱动网络程序整合 | 待学习 | — |
+| Week 4 | 非阻塞 I/O、`select`/`poll`/`epoll` | 原理已学习；独立观察程序待补 | `step2/week4`、`step2/week5` |
+| Week 5 | TCP socket 与 `epoll` echo server | 已实现并验证背压、半关闭和优雅退出 | `step2/week5` |
+| Week 6 | mini-shell、信号与作业控制 | 进行中；基础命令、重定向和单管道已实现 | `step2/week6` |
+| Week 7 | 目录、`mmap`、文件锁与 IPC | 主要实验已实现并验证 | `step2/week7` |
+| Week 8 | 事件驱动网络程序整合 | 非阻塞 HTTP 服务已实现，含固定响应与单层文件读取 | `step2/week8` |
 
 前几项实验最初作为基础阶段的过渡内容建立，因此本目录使用链接复用它们，不复制源码。这样能保留已有提交历史，并避免两份代码逐渐不一致。
+
+Week 7 已有目录遍历、`mmap` 读取、文件锁计数器、FIFO、阻塞及 `epoll` Unix Domain Socket 计数服务。Week 8 已加入 `epoll` HTTP 服务及单层文件读取。Week 6 的管道前台进程组控制仍需修正和交互验证；后台作业表与 `jobs`/`fg`/`bg` 尚未实现。阶段目标中的线程池也尚未实现。因此阶段 2 仍在进行中。
 
 ## 学习方法
 
