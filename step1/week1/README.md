@@ -14,9 +14,10 @@
 
 ## 编译与运行
 
-在具备 GCC 或 Clang 的 Linux/WSL 环境中：
+在当前 Fedora 系统终端中：
 
 ```bash
+cd /home/i/项目/work/miniOS/step1/week1
 make
 ./01_arrays_and_pointers
 ./02_structs_and_callbacks
@@ -32,7 +33,7 @@ make clean
 make SANITIZE=1
 ```
 
-当前 Windows 环境未检测到 GCC/Clang/Make，因此示例尚未在本机编译；可在 WSL 或安装 MinGW/LLVM 后执行以上命令。
+当前 Fedora 系统已安装 GCC 16.2.1 和 GNU Make 4.4.1，可在系统终端执行以上命令。VS Code 的 Flatpak 环境使用独立工具链，版本可能与系统不同。
 
 ## 本周练习
 

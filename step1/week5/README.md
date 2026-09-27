@@ -15,7 +15,7 @@
 ## 构建与运行
 
 ```bash
-cd /mnt/d/claude/miniOS/step1/week5
+cd /home/i/项目/work/miniOS/step1/week5
 make
 
 ./01_fork_identity

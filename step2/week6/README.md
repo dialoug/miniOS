@@ -14,7 +14,7 @@
 ## 第一项：观察 `argv`
 
 ```bash
-cd /mnt/d/claude/miniOS/step2/week6
+cd /home/i/项目/work/miniOS/step2/week6
 make
 
 ./01_argv_inspect alpha beta

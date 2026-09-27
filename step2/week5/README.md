@@ -7,7 +7,7 @@
 终端 1：
 
 ```bash
-cd /mnt/d/claude/miniOS/step2/week5
+cd /home/i/项目/work/miniOS/step2/week5
 make
 ./01_epoll_echo 9090
 ```

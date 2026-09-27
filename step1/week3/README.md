@@ -28,7 +28,7 @@
 ## 构建与运行
 
 ```bash
-cd /mnt/d/claude/miniOS/step1/week3
+cd /home/i/项目/work/miniOS/step1/week3
 make
 ./build/elf_demo
 ```

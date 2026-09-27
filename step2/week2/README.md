@@ -47,7 +47,7 @@ fd → struct file（offset、flags）→ inode（文件对象）
 ## 复习实验
 
 ```bash
-cd /mnt/d/claude/miniOS/step1/week6
+cd /home/i/项目/work/miniOS/step1/week6
 make
 printf 'hello\n' > source.txt
 ./01_mini_cp source.txt copy.txt

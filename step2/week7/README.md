@@ -5,7 +5,7 @@
 ## 构建与运行
 
 ```bash
-cd /mnt/d/claude/miniOS/step2/week7
+cd /home/i/项目/work/miniOS/step2/week7
 make
 
 ./01_mini_find .

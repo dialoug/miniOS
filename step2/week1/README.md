@@ -32,7 +32,7 @@ pipefd[1] → 内核管道缓冲区 → pipefd[0]
 ## 复习实验
 
 ```bash
-cd /mnt/d/claude/miniOS/step1/week5
+cd /home/i/项目/work/miniOS/step1/week5
 make
 ./01_fork_identity
 ./02_exec_wait

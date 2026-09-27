@@ -12,7 +12,7 @@
 ## 构建、运行与观察
 
 ```bash
-cd /mnt/d/claude/miniOS/step1/week6
+cd /home/i/项目/work/miniOS/step1/week6
 make
 
 printf 'hello\n' > source.txt

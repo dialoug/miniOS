@@ -11,10 +11,10 @@
 
 ## 编译与运行
 
-在 WSL 中：
+在当前 Fedora 系统终端中：
 
 ```bash
-cd /mnt/d/claude/miniOS/step1/week2
+cd /home/i/项目/work/miniOS/step1/week2
 make
 ./01_memory_layout
 ```

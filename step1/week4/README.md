@@ -13,7 +13,7 @@
 ## 构建与运行
 
 ```bash
-cd /mnt/d/claude/miniOS/step1/week4
+cd /home/i/项目/work/miniOS/step1/week4
 make
 
 ./01_thread_lifecycle
